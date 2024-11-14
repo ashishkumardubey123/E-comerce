@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+ 
 
 
 const ownerSchema = new mongoose.Schema({
@@ -22,4 +22,4 @@ const ownerSchema = new mongoose.Schema({
   gstin: String
 });
 
-module.exports= mongoose.model("owner","ownerSchema")
+module.exports= mongoose.model("Owner",ownerSchema)

@@ -24,6 +24,11 @@ app.use("/owner", ownerRouter);
 app.use("/user", usersRouter);
 app.use("/product", productRouter);
 
+// '/' route definition should be after the other routes
+app.get("/", (req, res) => {
+  res.send("hy, its working");
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

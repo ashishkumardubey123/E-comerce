@@ -1,8 +1,10 @@
 // process.env.DEBUG = 'development:mongoose';
-require('dotenv').config(); 
+// require('dotenv').config(); 
+const dotenv= require ('dotenv')
 
 const mongoose = require("mongoose");
 const config = require("config");
+dotenv.config({path:"..env"})
 const debug = require("debug")("development:mongoose");
 
 mongoose

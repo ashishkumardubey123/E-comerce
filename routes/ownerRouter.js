@@ -7,6 +7,8 @@ router.get("/", (req, res) => {
   res.send("Hello from owner route");
 });
 
+// if env have some change you need to re satrt the server  
+
 if (process.env.NODE_ENV =='development') {
   router.get("/create", async (req, res) => {
       

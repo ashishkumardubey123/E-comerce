@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
   res.send("Hello from owner route");
 });
 
-if (process.env.NODE_ENV ==='development') {
+if (process.env.NODE_ENV =='development') {
   router.get("/create", async (req, res) => {
       
       res.send("han me creaeter hun ")

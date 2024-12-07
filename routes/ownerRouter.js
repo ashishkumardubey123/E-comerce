@@ -13,13 +13,12 @@ if (process.env.NODE_ENV == "development") {
   router.post("/create", async (req, res) => {
     let owner = await ownerModel.find();
     if (owner.length > 0) {
-      return res.status(500).send("owner already register " );
-      console.log(owner)
-       
+      return res.status(500).send("owner already register ");
+      console.log(owner);
     }
-  let { fullname, email,password}= req.body
+    let { fullname, email, password } = req.body;
 
-  let creaetdOwner= await ownerModel.create({
+    let creaetdOwner = await ownerModel.create({
       fullname,
       email,
       password,

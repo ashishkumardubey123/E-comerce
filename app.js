@@ -7,6 +7,7 @@ const db = require("./config/mongoose-connection");
 const ownerRouter = require("./routes/ownerRouter");
 const usersRouter = require("./routes/usersRouter");
 const productRouter = require("./routes/productRouter");
+const index = require("./routes/index")
 
 const port = 3000;
 
@@ -23,12 +24,13 @@ app.set("view engine", "ejs");
 app.use("/owner", ownerRouter);
 app.use("/user", usersRouter);
 app.use("/product", productRouter);
+// app.use("/", index );
 
 // '/' route definition should be after the other routes
-app.get("/", (req, res) => {
-  res.send("hy, its working");
-});
 
+ app.get("/", (req, res) => {
+  res.render("index");
+});
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

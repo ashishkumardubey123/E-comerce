@@ -7,7 +7,7 @@ const config = require("config");
 const debug = require("debug")("development:mongoose");
 
 mongoose
-  .connect(`${config.get("MONGODB_URI")}/ecomerce `) 
+  .connect(`${(process.env.MONGODB_URI)}/ecomerce `) 
   .then(function () {
     debug("connected");
   })

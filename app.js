@@ -7,7 +7,9 @@ const db = require("./config/mongoose-connection");
 const ownerRouter = require("./routes/ownerRouter");
 const usersRouter = require("./routes/usersRouter");
 const productRouter = require("./routes/productRouter");
-const index = require("./routes/index")
+const index = require("./routes/index");
+const flash = require("connect-flash")
+const expressSession = require('express-session');
 
 const port = 3000;
 
@@ -15,8 +17,17 @@ const port = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(
+  expressSession({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    // cookie: { secure: false }, // Set secure to true for production environment
+  })
+)
 
 // Serve static files from the "public" directory
+app.use(flash())
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 
@@ -24,13 +35,15 @@ app.set("view engine", "ejs");
 app.use("/owner", ownerRouter);
 app.use("/user", usersRouter);
 app.use("/product", productRouter);
-// app.use("/", index );
+app.use("/", index);
 
-// '/' route definition should be after the other routes
 
- app.get("/", (req, res) => {
-  res.render("index");
+
+// Route for a simple dashboard (for successful login redirects)
+app.get("/dashboard", (req, res) => {
+  res.send("<h1>Welcome to the Dashboard!</h1>");
 });
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

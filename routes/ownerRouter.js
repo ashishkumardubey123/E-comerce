@@ -3,9 +3,7 @@ const router = express.Router();
 
 const ownerModel = require("../models/owner-model");
 
-router.get("/", (req, res) => {
-  res.send("Hello from owner route");
-});
+
 
 // if env have some change you need to re satrt the server
 
@@ -19,15 +17,19 @@ if (process.env.NODE_ENV == "development") {
     let { fullname, email, password } = req.body;
 
     let creaetdOwner = await ownerModel.create({
-      fullname,
-      email,
-      password,
+      fullname:fullname,
+      email: email,
+      password: password
     });
 
     res.send(creaetdOwner);
   });
 }
 
-console.log(process.env.NODE_ENV);
+router.get("/admin", (req, res) => {
+  let success= req.flash("success");
+  res.render("createproducts" ,{success});
+});
+
 
 module.exports = router;
